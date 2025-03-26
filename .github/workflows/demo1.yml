@@ -9,6 +9,15 @@ on:
       - "dev-*" # dev-new dev-this-is-new
       - "feat/**" # feat/new feat/new/button
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm ci
+      - name: Test code
+        run: npm run test
   deploy:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
@@ -17,12 +26,6 @@ jobs:
         run: echo "${{ github }}"
       - name: Output event data
         run: echo "${{ toJSON(github.event) }}"
-      - name: Get code
-        uses: actions/checkout@v3
-      - name: Install dependencies
-        run: npm ci
-      - name: Test code
-        run: npm run test
       - name: Build code
         run: npm run build
       - name: Deploy project
