@@ -19,6 +19,7 @@ jobs:
       - name: Test code
         run: npm run test
   deploy:
+    needs: test
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
