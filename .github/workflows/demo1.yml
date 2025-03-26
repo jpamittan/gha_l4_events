@@ -10,6 +10,7 @@ on:
       - "feat/**" # feat/new feat/new/button
 jobs:
   deploy:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Output raw data
